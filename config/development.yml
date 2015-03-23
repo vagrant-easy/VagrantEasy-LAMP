@@ -1,0 +1,51 @@
+vagrant:
+  ip: '192.168.50.5'
+  hostname: 'example.dev'
+
+ssh_users:
+  - ssh_user_name: 'deploy'
+    ssh_user_pass: 'no' #put 'no' to lock user
+    ssh_user_can_sudo: 'true'
+  - ssh_user_name: 'dvadmin'
+    ssh_user_pass: 'dvadmin1234'
+    ssh_user_can_sudo: 'true'
+  - ssh_user_name: 'dev'
+    ssh_user_pass: 'dev1234'
+    ssh_user_can_sudo: 'false'
+
+mysql_install:
+  host: 'localhost'
+  root_pass: 'papaya'
+
+mysql_databases:
+  - db_name: 'site_a'
+    db_user: 'siteauser'
+    db_pass: 'siteapass'
+  - db_name: 'site_b'
+    db_user: 'sitebuser'
+    db_pass: 'sitebpass'
+    
+apache_modules:
+  - 'mod_alias'
+  - 'mod_proxy'
+  - 'mod_proxy_connect'
+  - 'mod_proxy_ftp'
+  - 'mod_proxy_http'
+  - 'mod_proxy_fcgi'
+  - 'mod_proxy_scgi'
+  - 'mod_proxy_wstunnel'
+  - 'mod_proxy_ajp'
+  - 'mod_proxy_balancer'
+  - 'mod_proxy_express'
+  - 'mod_rewrite'
+    
+apache_sites:
+  - host: 'example.dev'
+    aliases:
+      - 'www.example.dev'
+      - 'ww2.example.dev'
+  - host: 'sample.dev'
+    aliases:
+      - 'www.sample.dev'
+      - 'ww2.sample.dev'
+    
