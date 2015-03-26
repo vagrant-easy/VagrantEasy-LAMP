@@ -5,47 +5,44 @@ vagrant:
 ssh_users:
   - ssh_user_name: 'deploy'
     ssh_user_pass: 'no' #put 'no' to lock user
-    ssh_user_can_sudo: 'true'
+    ssh_user_can_sudo: true
   - ssh_user_name: 'dvadmin'
     ssh_user_pass: 'dvadmin1234'
-    ssh_user_can_sudo: 'true'
+    ssh_user_can_sudo: true
   - ssh_user_name: 'dev'
     ssh_user_pass: 'dev1234'
-    ssh_user_can_sudo: 'false'
+    ssh_user_can_sudo: false
 
 mysql_install:
   host: 'localhost'
-  root_pass: 'papaya'
+  root_pass: 'root'
 
 mysql_databases:
-  - db_name: 'site_a'
-    db_user: 'siteauser'
-    db_pass: 'siteapass'
-  - db_name: 'site_b'
-    db_user: 'sitebuser'
-    db_pass: 'sitebpass'
+  - db_name: 'example_db'
+    db_user: 'example_user'
+    db_pass: 'example_pass'
     
 apache_modules:
-  - 'mod_alias'
-  - 'mod_proxy'
-  - 'mod_proxy_connect'
-  - 'mod_proxy_ftp'
-  - 'mod_proxy_http'
-  - 'mod_proxy_fcgi'
-  - 'mod_proxy_scgi'
-  - 'mod_proxy_wstunnel'
-  - 'mod_proxy_ajp'
-  - 'mod_proxy_balancer'
-  - 'mod_proxy_express'
-  - 'mod_rewrite'
+  - 'alias'
+  - 'proxy'
+  - 'proxy_connect'
+  - 'proxy_ftp'
+  - 'proxy_http'
+  - 'proxy_fcgi'
+  - 'proxy_scgi'
+  - 'proxy_wstunnel'
+  - 'proxy_ajp'
+  - 'proxy_balancer'
+  - 'proxy_express'
+  - 'rewrite'
+  - 'vhost_alias'
     
-apache_sites:
-  - host: 'example.dev'
+sites:
+  - directory: '/var/www/example'
+    enabled: true
+    log_level: debug
+    host: 'example.dev'
     aliases:
       - 'www.example.dev'
       - 'ww2.example.dev'
-  - host: 'sample.dev'
-    aliases:
-      - 'www.sample.dev'
-      - 'ww2.sample.dev'
     

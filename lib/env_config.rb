@@ -1,5 +1,11 @@
 require 'yaml'
 
+begin
+  Util
+rescue
+  require_relative 'util.rb'
+end
+
 module EnvConfig
 
   class Handler
@@ -8,6 +14,8 @@ module EnvConfig
       raise 'Config file not found.' unless File.exists?(config_file)
       
       @@config = YAML.load_file(config_file)
+      Util.stringify_bools! @@config
+      
       @@args_formatters = {}
       
       config
