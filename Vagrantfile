@@ -20,6 +20,24 @@ Vagrant.configure('2') do |config|
   config.vm.network :private_network, ip: EnvConfig::Handler.config['vagrant']['ip']
   
   config.vm.hostname = EnvConfig::Handler.config['vagrant']['hostname']
+  
+  sites = EnvConfig::Handler.config['sites']
+  
+  if Vagrant::Util::Platform.windows?
+    sites.each do |site|
+      config.vm.synced_folder site['local_path'], remote_site_path(site), owner: 'vagrant', group: 'www-data', mount_options: ['dmode=776', 'fmode=775']
+    end
+  else
+    if !Vagrant.has_plugin? 'vagrant-bindfs'
+      raise Vagrant::Errors::VagrantError.new,
+        "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
+    else
+      sites.each do |site|
+        config.vm.synced_folder site['local_path'], nfs_path(site), type: 'nfs'
+        config.bindfs.bind_folder nfs_path(site), remote_site_path(site), u: 'vagrant', g: 'www-data'
+      end
+    end
+  end
 
   Dir.glob('scripts/*.sh').each do |script_file|
     begin 
@@ -57,4 +75,12 @@ Vagrant.configure('2') do |config|
     vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
     vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
   end
+end
+
+def nfs_path(site)
+  "/vagrant-nfs-#{site['site_name']}"
+end
+
+def remote_site_path(site)
+  File.join('/var/www/', site['site_name'], 'current')
 end

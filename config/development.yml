@@ -38,7 +38,9 @@ apache_modules:
   - 'vhost_alias'
     
 sites:
-  - directory: '/var/www/example'
+  - site_name: 'VagrantEasy-LAMP-example-app'
+    local_path: '../VagrantEasy-LAMP-example-app' # Relative to Vagrantfile location
+    remote_path: '/var/www/VagrantEasy-LAMP-example-app'
     enabled: true
     log_level: debug
     host: 'example.dev'
