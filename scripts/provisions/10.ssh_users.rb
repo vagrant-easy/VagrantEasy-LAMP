@@ -11,8 +11,8 @@ EnvConfig::Handler.reg_formatter Util.strip_name(__FILE__) do |config|
     ssh_user_args = []
     
     ssh_user_config.each do |key, val|
-       ssh_user_args << "--#{key}"
-       ssh_user_args << val
+      ssh_user_args << "--#{key}"
+      ssh_user_args << val
     end
     
     args << ssh_user_args

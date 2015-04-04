@@ -10,8 +10,8 @@ EnvConfig::Handler.reg_formatter Util.strip_name(__FILE__) do |config|
   mysql_install_args = []
   
   config.each do |key, val|
-     mysql_install_args << "--#{key}"
-     mysql_install_args << val
+    mysql_install_args << "--#{key}"
+    mysql_install_args << val
   end
   
   args << mysql_install_args

@@ -11,8 +11,8 @@ EnvConfig::Handler.reg_formatter Util.strip_name(__FILE__) do |config|
     mysql_dbs_args = []
     
     mysql_dbs_config.each do |key, val|
-       mysql_dbs_args << "--#{key}"
-       mysql_dbs_args << val
+      mysql_dbs_args << "--#{key}"
+      mysql_dbs_args << val
     end
     
     # This script depends on config for mysql_install
