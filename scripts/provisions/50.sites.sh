@@ -65,5 +65,6 @@ ln -s /etc/apache2/sites-available/$HOST.conf /etc/apache2/sites-enabled/$HOST.c
 
 if $LAST
 then
+  rm -f /etc/apache2/sites-enabled/000-default.conf
   service apache2 restart
 fi
