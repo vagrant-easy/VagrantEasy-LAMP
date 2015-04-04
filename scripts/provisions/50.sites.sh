@@ -62,8 +62,11 @@ cat > /etc/apache2/sites-available/$HOST.conf << EOL
 </VirtualHost>
 EOL
 
-ln -s /etc/apache2/sites-available/$HOST.conf /etc/apache2/sites-enabled/$HOST.conf
-
+if $ENABLED
+then
+  ln -s /etc/apache2/sites-available/$HOST.conf /etc/apache2/sites-enabled/$HOST.conf
+if
+  
 if $LAST
 then
   rm -f /etc/apache2/sites-enabled/000-default.conf
