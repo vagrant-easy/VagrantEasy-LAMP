@@ -39,6 +39,21 @@ Vagrant.configure('2') do |config|
       end
     end
   end
+  
+  if !Vagrant.has_plugin? 'vagrant-triggers'
+    raise Vagrant::Errors::VagrantError.new,
+      "vagrant-triggers missing, please install the plugin:\nvagrant plugin install vagrant-triggers"
+  else
+    Dir.glob('scripts/triggers/*.rb').each do |script_file|
+      require_relative Util.remove_ext(script_file)
+    end
+    
+    TriggerConfig::Handler.triggers_for_env(SERVER_ENV).each do |t|
+      t[:trigger].each do |command, trigger|
+        t[:trigger_call].call config, command, trigger
+      end
+    end
+  end
 
   Dir.glob('scripts/provisions/*.sh').each do |script_file|
     begin 
