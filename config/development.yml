@@ -42,7 +42,7 @@ sites:
     local_path: '../VagrantEasy-LAMP-example-app' # Relative to Vagrantfile location
     remote_path: '/var/www/VagrantEasy-LAMP-example-app'
     enabled: true
-    log_level: debug
+    log_level: 'debug'
     host: 'example.dev'
     aliases:
       - 'www.example.dev'
