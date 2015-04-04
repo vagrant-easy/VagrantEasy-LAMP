@@ -1,7 +1,7 @@
 begin
   Util
 rescue
-  require_relative '../lib/util.rb'
+  require_relative '../../lib/util.rb'
 end
 
 EnvConfig::Handler.reg_formatter Util.strip_name(__FILE__) do |config|

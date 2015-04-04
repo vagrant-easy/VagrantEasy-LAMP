@@ -3,6 +3,7 @@
 
 require_relative 'lib/util'
 require_relative 'lib/env_config'
+require_relative 'lib/trigger_config'
 
 SERVER_ENV = File.read '.env'
 
@@ -39,7 +40,7 @@ Vagrant.configure('2') do |config|
     end
   end
 
-  Dir.glob('scripts/*.sh').each do |script_file|
+  Dir.glob('scripts/provisions/*.sh').each do |script_file|
     begin 
       require_relative Util.remove_ext(script_file)
     rescue LoadError
