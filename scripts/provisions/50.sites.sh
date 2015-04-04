@@ -46,6 +46,7 @@ if [ -z ${SITE_PATH+x} ]; then error_exit "--site_path is not set!"; fi
 if [ -z ${ENABLED+x} ]; then error_exit "--enabled is not set!"; fi
 if [ -z ${LOG_LEVEL+x} ]; then error_exit "--log_level is not set!"; fi
 if [ -z ${HOST+x} ]; then error_exit "--host is not set!"; fi
+if [ -z ${LAST+x} ]; then error_exit "--last is not set!"; fi
 
 cat > /etc/apache2/sites-available/$HOST.conf << EOL 
 <VirtualHost *:80>
