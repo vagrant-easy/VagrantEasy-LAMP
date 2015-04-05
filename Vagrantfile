@@ -5,7 +5,7 @@ require_relative 'lib/util'
 require_relative 'lib/env_config'
 require_relative 'lib/trigger_config'
 
-SERVER_ENV = File.read '.env'
+SERVER_ENV = File.read('.env').gsub(/[\r\n]/,'')
 
 VAGRANT_PATH = Dir.pwd
 
